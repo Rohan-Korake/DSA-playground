@@ -1,0 +1,26 @@
+<svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="34" cy="34" r="33.5" fill="url(#paint0_linear_129_386)" stroke="black"/>
+<circle cx="40.3932" cy="10.7522" r="3.85897" fill="white" stroke="white"/>
+<circle cx="20.6325" cy="15.4017" r="3.85897" fill="white" stroke="white"/>
+<circle cx="57.2479" cy="25.8632" r="3.85897" fill="white" stroke="white"/>
+<circle cx="50.8547" cy="50.8547" r="3.85897" fill="white" stroke="white"/>
+<circle cx="10.171" cy="33.4188" r="3.85897" fill="white" stroke="white"/>
+<circle cx="25.8632" cy="54.9231" r="3.85897" fill="white" stroke="white"/>
+<line x1="25.892" y1="52.999" x2="39.3473" y2="12.3153" stroke="white" stroke-width="3"/>
+<line x1="9.01687" y1="33.2461" x2="39.8203" y2="11.5598" stroke="white" stroke-width="3"/>
+<line x1="9.65494" y1="32.9896" x2="56.7319" y2="25.8333" stroke="white" stroke-width="3"/>
+<line x1="26.2881" y1="54.1214" x2="55.9291" y2="26.2239" stroke="white" stroke-width="3"/>
+<path d="M51.7265 49.6923L57.279 27.0851" stroke="white" stroke-width="3"/>
+<line x1="25.2453" y1="55.3889" x2="20.5957" y2="15.8676" stroke="white" stroke-width="3"/>
+<line x1="9.19978" y1="31.1547" x2="19.6613" y2="14.8812" stroke="white" stroke-width="3"/>
+<line x1="39.3711" y1="11.3171" x2="21.9352" y2="16.5479" stroke="white" stroke-width="3"/>
+<line x1="49.6887" y1="50.9226" x2="40.3896" y2="13.1448" stroke="white" stroke-width="3"/>
+<line x1="51.1798" y1="50.7986" x2="11.0773" y2="35.1063" stroke="white" stroke-width="3"/>
+<line x1="24.9718" y1="54.3935" x2="10.4419" y2="35.7952" stroke="white" stroke-width="3"/>
+<defs>
+<linearGradient id="paint0_linear_129_386" x1="34" y1="0" x2="34" y2="68" gradientUnits="userSpaceOnUse">
+<stop stop-color="#4F46E5"/>
+<stop offset="1" stop-color="#9333EA"/>
+</linearGradient>
+</defs>
+</svg>

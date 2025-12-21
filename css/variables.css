@@ -1,0 +1,42 @@
+/* dark mode (default) */
+:root {
+  /* main color */
+  --bg-color: #0f172a;
+  --bg-footer: #000000;
+  --text-footer: #c9ccd0;
+
+  /* card colors */
+  --bg-card: rgba(255, 255, 255, 0.12);
+
+  /* card text color */
+  --text-primary: #e5e7eb;
+  --text-secondary: #d2d4d8;
+  --text-muted: #9ca3af;
+
+  /* card button color */
+  --accent-primary: #3b82f6;
+  --accent-primary-hover: #60a5fa;
+
+  --button-text: #ffffff;
+}
+
+/* light mode */
+.light {
+  /* main color */
+  --bg-color: #e2e8f0;
+  --bg-footer: #0f172a;
+  --text-footer: #c9ccd0;
+
+  /* card colors */
+  --bg-card: rgba(151, 154, 158, 0.181);
+
+  /* card text color */
+  --text-primary: #0f172a;
+  --text-secondary: #0f172ad5;
+  --text-muted: #7c8ea7;
+  /* card button color */
+  --accent-primary: #2563eb;
+  --accent-primary-hover: #1e40af;
+
+  --button-text: #ffffff;
+}

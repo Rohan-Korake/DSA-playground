@@ -1,0 +1,153 @@
+.header {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--text-primary);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--bg-color);
+}
+
+.brand-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.logo img {
+  width: 2.5rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.name {
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: -0.4rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.nav-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  visibility: visible;
+}
+
+.mode-button {
+  width: 2rem;
+  margin: 0 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#darkMode {
+  display: none;
+}
+
+.dark-mode img {
+  width: 2rem;
+}
+
+.light-mode img {
+  width: 1.9rem;
+}
+
+.home,
+.about {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-left: 0.5rem;
+  color: var(--text-primary);
+  font-family: "Poppins", sans-serif;
+}
+
+@keyframes hidden-animation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes show-animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hamburger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  flex-direction: column;
+  display: none;
+  margin-right: 1rem;
+}
+
+.lines {
+  border-radius: 0.5rem;
+  width: 30px;
+  height: 4px;
+  background-color: var(--text-primary);
+}
+
+@media (max-width: 650px) {
+  .header {
+    padding: 0.5rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .logo img {
+    width: 1.9rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+
+  .name {
+    font-size: 1rem;
+  }
+
+  .home,
+  .about {
+    display: none;
+  }
+
+  .lines {
+    width: 20px;
+    height: 2px;
+  }
+
+  .mode-button {
+    width: 1.6rem;
+  }
+  .dark-mode img {
+    width: 1.5rem;
+  }
+
+  .light-mode img {
+    width: 1.5rem;
+  }
+
+  .mode-button {
+    margin: 0 0.5rem;
+  }
+}
