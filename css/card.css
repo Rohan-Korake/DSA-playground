@@ -6,16 +6,15 @@
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  margin-top: 5rem;
   overflow-y: scroll;
   scroll-behavior: smooth;
   overflow: hidden;
+  margin: 1rem;
 }
 
 .card {
   width: 330px;
   background-color: var(--bg-card);
-  box-shadow: 0 0 12px rgb(var(--glow) / 0.25), 0 0 24px rgb(var(--glow) / 0.12);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,6 +56,11 @@
 .algo-visual-stack img {
   width: 8rem;
   margin: 0.2rem;
+}
+
+.algo-visual-sort img {
+  width: 8rem;
+  margin: 0.4rem;
 }
 
 .card-desc {
@@ -117,6 +121,11 @@
   .algo-visual-search img {
     width: 8rem;
     margin: 0.4rem;
+  }
+
+  .algo-visual-sort img {
+    width: 8rem;
+    margin: 0.6rem;
   }
 
   .algo-visual-stack img {

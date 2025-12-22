@@ -13,3 +13,43 @@ html {
   background-color: var(--bg-color);
   font-family: "Poppins", sans-serif;
 }
+
+.typeWritter-container {
+  margin-top: 5.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-primary);
+  font-size: 2rem;
+  line-height: 1.4;
+  font-weight: 600;
+  text-align: center;
+  color: #38bdf8;
+}
+
+#typeWritterContainer {
+  height: 2rem;
+}
+
+@media (max-width: 600px) {
+  .typeWritter-container {
+    font-size: 1.5rem;
+  }
+
+  #typeWritterContainer {
+    height: 2rem;
+  }
+}
+
+#typeWritterContainer::after {
+  content: "|";
+  animation: blink 1s step-start infinite;
+  margin: 0.2rem;
+  color: #48bcee;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
