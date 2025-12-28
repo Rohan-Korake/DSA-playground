@@ -4,6 +4,8 @@
   --bg-color: #0f172a;
   --bg-footer: #000000;
   --text-footer: #c9ccd0;
+  --typewritter-text: #60a5fa;
+  --typewritter-cursor: #38bdf8;
 
   /* card colors */
   --bg-card: rgba(255, 255, 255, 0.12);
@@ -11,6 +13,7 @@
   /* card text color */
   --text-primary: #e5e7eb;
   --text-secondary: #d2d4d8;
+  --text-tertiary: #bfc1c5;
   --text-muted: #9ca3af;
 
   /* card button color */
@@ -26,6 +29,8 @@
   --bg-color: #e2e8f0;
   --bg-footer: #0f172a;
   --text-footer: #c9ccd0;
+  --typewritter-text: #2563eb;
+  --typewritter-cursor: #0284c7;
 
   /* card colors */
   --bg-card: rgba(151, 154, 158, 0.181);
@@ -33,6 +38,7 @@
   /* card text color */
   --text-primary: #0f172a;
   --text-secondary: #0f172ad5;
+  --text-tertiary: #1e293b;
   --text-muted: #7c8ea7;
   /* card button color */
   --accent-primary: #2563eb;

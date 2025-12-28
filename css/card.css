@@ -10,6 +10,11 @@
   scroll-behavior: smooth;
   overflow: hidden;
   margin: 1rem;
+  transition: opacity 0.6s ease;
+}
+
+#homePage {
+  display: none;
 }
 
 .card {
@@ -34,6 +39,7 @@
 }
 
 .algo-visual {
+  height: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,6 +85,7 @@
   font-size: 1.2rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
+  cursor: pointer;
 }
 
 .try-button:hover {
@@ -131,5 +138,35 @@
   .algo-visual-stack img {
     width: 8rem;
     margin: 0.2rem;
+  }
+}
+
+.hide-wave {
+  animation: waveHide 0.7s ease forwards;
+}
+
+@keyframes waveHide {
+  0% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+}
+
+.show-wave {
+  animation: waveShow 0.7s ease forwards;
+}
+
+@keyframes waveShow {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
   }
 }
