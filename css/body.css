@@ -64,3 +64,7 @@ body {
 #bubbleSortPage {
   display: none;
 }
+
+main {
+  flex: 1;
+}
