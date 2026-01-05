@@ -1,156 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
-    <title>DSA Playground</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="header">
-      <div class="brand-container">
-        <div class="logo" onclick="location.reload()">
-          <img src="assets/logo.svg" alt="Logo" />
-        </div>
-        <div class="name">DSA Playground</div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+  <title>DSA Playground</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div class="header">
+    <div class="brand-container">
+      <div class="logo" onclick="location.reload()">
+        <img src="assets/logo.svg" alt="Logo" />
+      </div>
+      <div class="name">DSA Playground</div>
+    </div>
+
+    <!-- Nav options -->
+    <div class="nav-option">
+      <div class="overlay" id="overlay"></div>
+      <div class="nav-menu" id="navMenu">
+        <div class="home" id="homeNav">Home</div>
+        <div class="about" id="aboutNav">About</div>
       </div>
 
-      <!-- Nav options -->
-      <div class="nav-option">
-        <div class="overlay" id="overlay"></div>
-        <div class="nav-menu" id="navMenu">
-          <div class="home" id="homeNav">Home</div>
-          <div class="about" id="aboutNav">About</div>
+      <div class="mode-button" id="themeToggle">
+        <div class="light-mode">
+          <img src="assets/toggle-button/light-mode.svg" alt="light-mode" id="lightMode" />
         </div>
+        <div class="dark-mode">
+          <img src="assets/toggle-button/dark-mode.svg" alt="dark-mode" id="darkMode" />
+        </div>
+      </div>
+      <div class="hamburger" id="hamBurger">
+        <div class="lines"></div>
+        <div class="lines"></div>
+        <div class="lines"></div>
+      </div>
+    </div>
+  </div>
+  <main id="main">
+    <div class="home-page" id="homePage">
+      <!-- Type writter effect  -->
+      <div class="typeWritter-container" id="typeWritterContainer"></div>
+      <div class="blink-line"></div>
 
-        <div class="mode-button" id="themeToggle">
-          <div class="light-mode">
-            <img
-              src="assets/toggle-button/light-mode.svg"
-              alt="light-mode"
-              id="lightMode"
-            />
-          </div>
-          <div class="dark-mode">
-            <img
-              src="assets/toggle-button/dark-mode.svg"
-              alt="dark-mode"
-              id="darkMode"
-            />
+      <!-- Landing page card Container -->
+      <div class="card-container" id="cardContainer"></div>
+    </div>
+
+    <!-- Algorithm visualizer  -->
+    <div class="visualizer-container" id="visualizerContainer">
+      <div class="intro-outer-container">
+        <div class="content-box">
+          <div class="title" id="title"></div>
+          <div class="subtitle" id="description"></div>
+          <div class="outer-algo-meta">
+            <div class="left-side">
+              <div class="meta-item">
+                <div class="meta-item-heading">Category :</div>
+                <div class="meta-item-value" id="category"></div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-item-heading">Difficulty Level:</div>
+                <div class="meta-item-value" id="level"></div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-item-heading">Approach:</div>
+                <div class="meta-item-value" id="approach"></div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-item-heading">Space Complexity:</div>
+                <div class="meta-item-value" id="spaceComp"></div>
+              </div>
+            </div>
+            <div class="right-side">
+              <div class="meta-item">
+                <div class="meta-item-heading">Time Complexity</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-item-heading">Best Case:</div>
+                <div class="meta-item-value" id="bestCase"></div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-item-heading">Average Case:</div>
+                <div class="meta-item-value" id="averageCase"></div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-item-heading">Worst Case:</div>
+                <div class="meta-item-value" id="worstCase"></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="hamburger" id="hamBurger">
-          <div class="lines"></div>
-          <div class="lines"></div>
-          <div class="lines"></div>
+        <div class="input-box">
+          <div class="title">Enter Elements</div>
+          <input type="text" class="input-field" placeholder="e.g. 4 15 12 18" id="inputBox" />
+          <div class="rules">
+            Only integers are allowed, and values must be separated by spaces.
+          </div>
+          <div class="control-button">
+            <div class="control-btn" id="start">Start</div>
+            <div class="control-btn" id="stop">Stop</div>
+            <div class="control-btn" id="random">Random</div>
+          </div>
         </div>
       </div>
     </div>
-    <main id="main">
-      <div class="home-page" id="homePage">
-        <!-- Type writter effect  -->
-        <div class="typeWritter-container" id="typeWritterContainer"></div>
-        <div class="blink-line"></div>
+  </main>
 
-        <!-- Landing page card Container -->
-        <div class="card-container" id="cardContainer"></div>
+  <footer>
+    <div class="footer-title">DSA PLAYGROUND</div>
+    <div class="tag-line">Learn Data Structures with fun simulations.</div>
+    <div class="social-link-heading">Connect with me:</div>
+    <div class="social-links">
+      <div class="github-link">
+        <a href="https://github.com/Rohan-Korake" target="_blank"><img src="./assets/icons/github.svg"
+            alt="github" /></a>
       </div>
+      <div class="linkedin-link">
+        <a href="https://www.linkedin.com/in/rohan-korake-720848342/" target="_blank"><img
+            src="./assets/icons/linkedin.svg" alt="linkedin" /></a>
+      </div>
+      <div class="mail-link">
+        <a href="mailto:rohannkorake@gmail.com" target="_blank"><img src="./assets/icons/mail.svg" alt="Mail" /></a>
+      </div>
+    </div>
+    <p>&copy; 2026 DSA Playground. All Rights Reserved.</p>
+  </footer>
+  <script type="module" src="src/main.js"></script>
+</body>
 
-      <!-- Algorithm visualizer  -->
-      <div class="visualizer-container" id="visualizerContainer">
-        <div class="intro-outer-container">
-          <div class="content-box">
-            <div class="title"></div>
-            <div class="subtitle"></div>
-            <div class="outer-algo-meta">
-              <div class="left-side">
-                <div class="meta-item">
-                  <div class="meta-item-heading">Category :</div>
-                  <div class="meta-item-value" id="category"></div>
-                </div>
-                <div class="meta-item">
-                  <div class="meta-item-heading">Difficulty Level:</div>
-                  <div class="meta-item-value" id="level"></div>
-                </div>
-                <div class="meta-item">
-                  <div class="meta-item-heading">Approach:</div>
-                  <div class="meta-item-value" id="approach"></div>
-                </div>
-                <div class="meta-item">
-                  <div class="meta-item-heading">Space Complexity:</div>
-                  <div class="meta-item-value" id="spaceComp"></div>
-                </div>
-              </div>
-              <div class="right-side">
-                <div class="meta-item">
-                  <div class="meta-item-heading">Time Complexity</div>
-                </div>
-                <div class="meta-item">
-                  <div class="meta-item-heading">Best Case:</div>
-                  <div class="meta-item-value" id="bestCase"></div>
-                </div>
-                <div class="meta-item">
-                  <div class="meta-item-heading">Average Case:</div>
-                  <div class="meta-item-value" id="averageCase"></div>
-                </div>
-                <div class="meta-item">
-                  <div class="meta-item-heading">Worst Case:</div>
-                  <div class="meta-item-value" id="worstCase"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="input-box">
-            <div class="title">Enter Elements</div>
-            <input
-              type="text"
-              class="input-field"
-              placeholder="e.g. 4 15 12 18"
-              id="inputBox"
-            />
-            <div class="rules">
-              Only integers are allowed, and values must be separated by spaces.
-            </div>
-            <div class="control-button">
-              <div class="control-btn" id="start">Start</div>
-              <div class="control-btn" id="stop">Stop</div>
-              <div class="control-btn" id="random">Random</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <footer>
-      <div class="footer-title">DSA PLAYGROUND</div>
-      <div class="tag-line">Learn Data Structures with fun simulations.</div>
-      <div class="social-link-heading">Connect with me:</div>
-      <div class="social-links">
-        <div class="github-link">
-          <a href="https://github.com/Rohan-Korake" target="_blank"
-            ><img src="./assets/icons/github.svg" alt="github"
-          /></a>
-        </div>
-        <div class="linkedin-link">
-          <a
-            href="https://www.linkedin.com/in/rohan-korake-720848342/"
-            target="_blank"
-            ><img src="./assets/icons/linkedin.svg" alt="linkedin"
-          /></a>
-        </div>
-        <div class="mail-link">
-          <a href="mailto:rohannkorake@gmail.com" target="_blank"
-            ><img src="./assets/icons/mail.svg" alt="Mail"
-          /></a>
-        </div>
-      </div>
-      <p>&copy; 2026 DSA Playground. All Rights Reserved.</p>
-    </footer>
-    <script type="module" src="src/main.js"></script>
-  </body>
 </html>
