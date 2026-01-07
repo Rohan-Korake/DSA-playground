@@ -24,8 +24,8 @@ function loadData(algoName) {
   category.innerText = algoData.category;
   level.innerText = algoData.level;
   approach.innerText = algoData.approach;
-  spaceComp.innerText = algoData.spaceComp;
-  bestCase.innerText = algoData.bestCase;
-  averageCase.innerText = algoData.averageCase;
-  worstCase.innerText = algoData.worstCase;
+  spaceComp.innerText = algoData.space;
+  bestCase.innerText = algoData.time.best;
+  averageCase.innerText = algoData.time.average;
+  worstCase.innerText = algoData.time.worst;
 }
