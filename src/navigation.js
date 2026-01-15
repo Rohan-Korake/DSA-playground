@@ -57,6 +57,7 @@ export function initNavbar() {
     // get exact element from multiple id's
     const cardButton = e.target.closest(".try-button");
     if (!cardButton) return;
+    console.log(cardButton.id);
 
     homePage.classList.remove("show-wave");
     homePage.classList.add("hide-wave");
