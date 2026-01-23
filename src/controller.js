@@ -1,6 +1,12 @@
+import { selectedAlgo } from "./renderAlgorithm.js";
+import { sortingMethod } from "./sorting.js";
+import { searchingMethod } from "./searching.js";
+import { simulationMethod } from "./simulation.js";
+
 export function controller() {
   const start = document.getElementById("start");
   const random = document.getElementById("random");
+  const stop = document.getElementById("stop");
   const algorithmVisualizer = document.getElementById("algorithmVisualizer");
   let cardId = 0;
 
@@ -24,6 +30,16 @@ export function controller() {
         }
       });
     }
+    startVisualization();
+  });
+
+  // handle stop button event
+  stop.addEventListener("click", function () {
+    const card1 = document.getElementById("1");
+    const card2 = document.getElementById("2");
+
+    card1.classList.add("swapLeft");
+    card2.classList.add("swapRight");
   });
 
   // handle random value button
@@ -36,17 +52,34 @@ export function controller() {
       arr.push(Math.floor(Math.random() * 100) + 1);
       inputBox.value = arr.join(" ");
     }
-    arr.forEach((num) => {
-      createBlock(num);
-    });
   });
+
+  function createBlock(ele) {
+    const box = document.createElement("div");
+    box.className = "box";
+    box.id = cardId += 1;
+    box.innerText = ele;
+    algorithmVisualizer.appendChild(box);
+  }
 }
 
-function createBlock(ele) {
-  const box = document.createElement("div");
-  box.className = "box";
-  box.innerHTML = `
-    <div class="text" id="${(cardId += 1)}">${ele}</div>
-    `;
-  algorithmVisualizer.appendChild(box);
+//assign correct algorithm process
+function startVisualization() {
+  if (
+    selectedAlgo == "bubbleSort" ||
+    selectedAlgo == "selectionSort" ||
+    selectedAlgo == "insertionSort" ||
+    selectedAlgo == "mergeSort" ||
+    selectedAlgo == "quickSort"
+  ) {
+    sortingMethod(selectedAlgo);
+    return;
+  }
+  if (selectedAlgo == "linearSearch" || selectedAlgo == "binarySearch") {
+    searchingMethod(selectedAlgo);
+    return;
+  }
+  if (selectedAlgo == "stackSimulation" || selectedAlgo == "queueSimulation") {
+    simulationMethod(selectedAlgo);
+  }
 }

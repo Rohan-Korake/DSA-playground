@@ -17,7 +17,9 @@ export function renderAlgo() {
   });
 }
 
+let selectedAlgo;
 function loadData(algoName) {
+  selectedAlgo = algoName;
   const algoData = algorithms[algoName];
   title.innerText = algoData.title;
   description.innerText = algoData.description;
@@ -29,3 +31,5 @@ function loadData(algoName) {
   averageCase.innerText = algoData.time.average;
   worstCase.innerText = algoData.time.worst;
 }
+
+export { selectedAlgo };

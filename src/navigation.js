@@ -44,7 +44,7 @@ export function initNavbar() {
         homePage.style.display = "block";
         homePage.classList.add("show-wave");
       },
-      { once: true }
+      { once: true },
     );
   });
 
@@ -57,7 +57,6 @@ export function initNavbar() {
     // get exact element from multiple id's
     const cardButton = e.target.closest(".try-button");
     if (!cardButton) return;
-    console.log(cardButton.id);
 
     homePage.classList.remove("show-wave");
     homePage.classList.add("hide-wave");
@@ -72,7 +71,7 @@ export function initNavbar() {
         visualizerContainer.style.display = "block";
         visualizerContainer.classList.add("show-wave");
       },
-      { once: true }
+      { once: true },
     );
   });
 

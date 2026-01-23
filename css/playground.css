@@ -124,7 +124,10 @@ input::placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
   cursor: pointer;
 }
 
@@ -229,12 +232,22 @@ input::placeholder {
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
+  transition: transform 0.5s ease;
 }
 
 .swapLeft {
-  transform: translateX(170px);
+  transform: translateX(110px);
 }
 
 .swapRight {
-  transform: translateX(-170px);
+  transform: translateX(-110px);
+}
+
+.visualizer-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-secondary);
 }
