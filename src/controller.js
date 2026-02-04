@@ -2,50 +2,64 @@ import { selectedAlgo } from "./renderAlgorithm.js";
 import { sortingMethod } from "./sorting.js";
 import { searchingMethod } from "./searching.js";
 import { simulationMethod } from "./simulation.js";
+import { resetStepCount } from "./sorting.js";
+
+export let isTerminated = false;
 
 export function controller() {
   const start = document.getElementById("start");
   const random = document.getElementById("random");
-  const stop = document.getElementById("stop");
+  const reset = document.getElementById("reset");
   const algorithmVisualizer = document.getElementById("algorithmVisualizer");
+  const inputBox = document.getElementById("inputBox");
+  const executionStepContianer = document.getElementById(
+    "executionStepContianer",
+  );
+  const executionStep = document.getElementById("executionStep");
   let cardId = 0;
-
   // handle start button functionality
   start.addEventListener("click", function () {
     cardId = 0;
+    isTerminated = false;
+    executionStep.innerHTML = "";
     algorithmVisualizer.innerHTML = "";
+    resetStepCount();
     const inputBox = document.getElementById("inputBox").value;
-    // convert string → array of numbers
     const numbers = inputBox.split(" ").map(Number);
-    if (inputBox == "") {
+
+    if (inputBox === "") {
       alert("Enter input numbers!");
       return;
-    } else {
-      numbers.forEach((num) => {
-        if (num > 0) {
-          createBlock(num);
-        } else {
-          alert("Enter positive numbers!");
-          return;
-        }
-      });
     }
+
+    for (let num of numbers) {
+      if (num <= 0) {
+        alert("Enter positive numbers!");
+        algorithmVisualizer.innerHTML = "";
+        return;
+      }
+      createBlock(num);
+    }
+    executionStepContianer.style.display = "block";
     startVisualization();
   });
 
-  // handle stop button event
-  stop.addEventListener("click", function () {
-    const card1 = document.getElementById("1");
-    const card2 = document.getElementById("2");
-
-    card1.classList.add("swapLeft");
-    card2.classList.add("swapRight");
+  // handle reset button event
+  reset.addEventListener("click", function () {
+    inputBox.value = "";
+    isTerminated = true;
+    executionStep.innerHTML = "";
+    algorithmVisualizer.innerHTML = "";
+    executionStepContianer.style.display = "none";
   });
 
   // handle random value button
   random.addEventListener("click", function () {
+    isTerminated = true;
     cardId = 0;
     algorithmVisualizer.innerHTML = "";
+    executionStepContianer.style.display = "none";
+
     const arr = [];
     const inputBox = document.getElementById("inputBox");
     for (let i = 0; i < 5; i++) {
