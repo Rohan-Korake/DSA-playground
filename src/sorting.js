@@ -64,6 +64,7 @@ let stepCount = -1;
 function updateExecutionSteps(numbers, action, type, operand1, operand2) {
   stepCount++;
   const stepAction = document.createElement("div");
+  updateWorkingStatus(action, type, operand1, operand2);
   stepAction.className = "action";
   if (action == "Start" || action == "Stop") {
     stepAction.innerText = `${action}  ${type}`;
@@ -90,6 +91,15 @@ function updateExecutionSteps(numbers, action, type, operand1, operand2) {
   } else {
     return;
   }
+}
+
+const workingStatus = document.getElementById("workingStatus");
+function updateWorkingStatus(action, type, operand1, operand2) {
+  if (operand1 == null && operand2 == null) {
+    workingStatus.innerText = `${action} ${type}`;
+    return;
+  }
+  workingStatus.innerText = `${action} ${operand1} & ${operand2}`;
 }
 
 export function resetStepCount() {

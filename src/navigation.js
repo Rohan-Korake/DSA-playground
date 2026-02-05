@@ -1,3 +1,5 @@
+import { resetAlgorithmState } from "./controller.js";
+
 export function initNavbar() {
   const hamBurger = document.getElementById("hamBurger");
   const navMenu = document.getElementById("navMenu");
@@ -26,6 +28,7 @@ export function initNavbar() {
   homeNav.addEventListener("click", function () {
     if (navMenu.style.display == "block") {
       toggleHamburgerMenu();
+      resetAlgorithmState();
     }
 
     //check the current is home or not
@@ -70,6 +73,7 @@ export function initNavbar() {
         homePage.removeEventListener("animationend", _hideHome);
         visualizerContainer.style.display = "block";
         visualizerContainer.classList.add("show-wave");
+        resetAlgorithmState();
       },
       { once: true },
     );

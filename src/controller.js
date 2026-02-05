@@ -15,11 +15,16 @@ export function controller() {
   const executionStepContianer = document.getElementById(
     "executionStepContianer",
   );
+
   const executionStep = document.getElementById("executionStep");
-  let cardId = 0;
+  let cardId = 0,
+    isExecuting = false;
+
   // handle start button functionality
   start.addEventListener("click", function () {
+    if (isExecuting) return;
     cardId = 0;
+    isExecuting = true;
     isTerminated = false;
     executionStep.innerHTML = "";
     algorithmVisualizer.innerHTML = "";
@@ -41,24 +46,25 @@ export function controller() {
       createBlock(num);
     }
     executionStepContianer.style.display = "block";
+    start.disabled = true;
     startVisualization();
   });
 
   // handle reset button event
   reset.addEventListener("click", function () {
     inputBox.value = "";
+    isExecuting = false;
     isTerminated = true;
     executionStep.innerHTML = "";
-    algorithmVisualizer.innerHTML = "";
-    executionStepContianer.style.display = "none";
+    resetAlgorithmState();
   });
 
   // handle random value button
   random.addEventListener("click", function () {
+    isExecuting = false;
     isTerminated = true;
     cardId = 0;
-    algorithmVisualizer.innerHTML = "";
-    executionStepContianer.style.display = "none";
+    resetAlgorithmState();
 
     const arr = [];
     const inputBox = document.getElementById("inputBox");
@@ -96,4 +102,41 @@ function startVisualization() {
   if (selectedAlgo == "stackSimulation" || selectedAlgo == "queueSimulation") {
     simulationMethod(selectedAlgo);
   }
+}
+
+// handle copy button event
+copyBtn.addEventListener("click", async function () {
+  const container = document.getElementById("executionStepContianer");
+
+  if (!container || container.innerText.trim() === "") {
+    alert("Nothing to copy!");
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(container.innerText);
+    copyBtn.innerText = "Copied!";
+
+    setTimeout(() => {
+      copyBtn.innerHTML = `<i class="fa-regular fa-clone"></i>`;
+    }, 1500);
+  } catch (err) {
+    alert("Copy failed!");
+  }
+});
+
+export function resetAlgorithmState() {
+  const algorithmVisualizer = document.getElementById("algorithmVisualizer");
+  const inputBox = document.getElementById("inputBox");
+  const executionStep = document.getElementById("executionStep");
+  const executionStepContianer = document.getElementById(
+    "executionStepContianer",
+  );
+  const workingStatus = document.getElementById("workingStatus");
+  inputBox.value = "";
+  algorithmVisualizer.innerHTML = "";
+  executionStep.innerHTML = "";
+  executionStepContianer.style.display = "none";
+  isTerminated = true;
+  workingStatus.innerText = "Ready to Start";
 }
