@@ -8,12 +8,18 @@ export async function sortingMethod(selectedAlgo) {
   if (selectedAlgo === "bubbleSort") {
     await bubbleSort(numbers, boxes);
   }
+
+  if (selectedAlgo === "selectionSort") {
+    await selectionSort(numbers, boxes);
+  }
 }
 
+// Common sleep function
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// handle swapping process
 async function swapVisual(numbers, boxes, i, j) {
   if (isTerminated) return;
 
@@ -26,6 +32,16 @@ async function swapVisual(numbers, boxes, i, j) {
   boxes[j].innerText = numbers[j];
 }
 
+//Show exeution complete state
+function showTermination(boxes, numbers) {
+  updateExecutionSteps(numbers, "Stop", "Sorting", null, null);
+  boxes.forEach((box) => {
+    if (isTerminated) return;
+    box.classList.add("sorted");
+  });
+}
+
+// handle bubble sort visualization
 async function bubbleSort(numbers, boxes) {
   if (isTerminated) return;
   updateExecutionSteps(numbers, "Start", "Sorting", null, null);
@@ -43,22 +59,64 @@ async function bubbleSort(numbers, boxes) {
         numbers[j],
         numbers[j + 1],
       );
+
       if (numbers[j] > numbers[j + 1]) {
         await swapVisual(numbers, boxes, j, j + 1);
       }
-      if (isTerminated) return;
 
+      if (isTerminated) return;
       boxes[j].classList.remove("compare");
       boxes[j + 1].classList.remove("compare");
     }
   }
-  updateExecutionSteps(numbers, "Stop", "Sorting", null, null);
-  boxes.forEach((box) => {
-    if (isTerminated) return;
-    box.classList.add("sorted");
-  });
+  showTermination(boxes, numbers);
 }
 
+async function selectionSort(numbers, boxes) {
+  if (isTerminated) return;
+  updateExecutionSteps(numbers, "Start", "Sorting", null, null);
+  for (let i = 0; i < numbers.length - 1; i++) {
+    let minIndex = i;
+    boxes[i].classList.add("current");
+    for (let j = i + 1; j < numbers.length; j++) {
+      boxes[minIndex].classList.add("compare");
+      boxes[j].classList.add("compare");
+      updateExecutionSteps(
+        numbers,
+        "Compare",
+        "Sorting",
+        numbers[j],
+        numbers[minIndex],
+      );
+      await sleep(1000);
+      if (isTerminated) return;
+
+      if (numbers[j] < numbers[minIndex]) {
+        boxes[minIndex].classList.remove("compare");
+        minIndex = j;
+      }
+      boxes[j].classList.remove("compare");
+    }
+    boxes[minIndex].classList.remove("compare");
+    if (minIndex !== i) {
+      updateExecutionSteps(
+        numbers,
+        "Swap",
+        "Sorting",
+        numbers[i],
+        numbers[minIndex],
+      );
+      await swapVisual(numbers, boxes, i, minIndex);
+    }
+
+    boxes[i].classList.remove("current");
+    boxes[i].classList.add("sorted");
+    if (isTerminated) return;
+  }
+  showTermination(boxes, numbers);
+}
+
+// update the executed step in execution box
 const executionStep = document.getElementById("executionStep");
 let stepCount = -1;
 function updateExecutionSteps(numbers, action, type, operand1, operand2) {
@@ -83,7 +141,7 @@ function updateExecutionSteps(numbers, action, type, operand1, operand2) {
   ) {
     const stepValue = document.createElement("div");
     stepValue.className = "value";
-    stepValue.innerText = numbers.join(" ");
+    stepValue.innerText = numbers.join("   |   ");
 
     executionStep.appendChild(stepAction);
     executionStep.appendChild(stepValue);
@@ -93,6 +151,7 @@ function updateExecutionSteps(numbers, action, type, operand1, operand2) {
   }
 }
 
+// update woking status of process
 const workingStatus = document.getElementById("workingStatus");
 function updateWorkingStatus(action, type, operand1, operand2) {
   if (operand1 == null && operand2 == null) {
@@ -102,6 +161,7 @@ function updateWorkingStatus(action, type, operand1, operand2) {
   workingStatus.innerText = `${action} ${operand1} & ${operand2}`;
 }
 
+// reset the step counter
 export function resetStepCount() {
   stepCount = -1;
 }

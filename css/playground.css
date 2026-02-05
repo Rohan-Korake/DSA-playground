@@ -1,10 +1,10 @@
 .intro-outer-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  display: flex;
+  gap: 2rem;
+  align-items: stretch;
+  justify-content: center;
 }
 
 .input-box,
@@ -22,11 +22,6 @@
 
 .input-box {
   gap: 0.7rem;
-}
-.intro-outer-container {
-  display: flex;
-  gap: 2rem;
-  align-items: stretch;
 }
 
 .title {
@@ -211,7 +206,7 @@ input::placeholder {
   width: 6rem;
   height: 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   margin: 0.5rem;
   color: var(--text-primary);
@@ -237,10 +232,23 @@ input::placeholder {
 }
 
 @media (max-width: 667px) {
+  .intro-outer-container {
+    gap: 2rem;
+  }
+
+  .input-box {
+    gap: 0.1rem;
+  }
+
+  .intro-outer-container {
+    gap: 1rem;
+  }
+
   .input-box,
   .content-box {
     width: 85%;
     padding: 0.5rem;
+    margin: 0.5rem;
   }
 
   .title {
@@ -261,7 +269,7 @@ input::placeholder {
 
   .input-box,
   .content-box {
-    margin: 1rem;
+    margin: 0.2rem;
     padding: 0.5rem;
   }
 
@@ -286,6 +294,7 @@ input::placeholder {
   }
 
   .rules {
+    margin: 0.2rem 0.4rem;
     font-size: 0.7rem;
   }
 
@@ -297,6 +306,39 @@ input::placeholder {
     min-width: 30px;
     height: 30px;
     border-radius: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .execution-step-container {
+    width: 94%;
+  }
+
+  .heading-contianer,
+  .execution-step {
+    padding: 0.5rem;
+    margin: 0.5rem 1rem;
+  }
+
+  .step-box-heading {
+    font-size: 1.3rem;
+  }
+
+  .copy-button {
+    width: 5rem;
+    height: 1rem;
+    font-size: 1rem;
+  }
+
+  .copy-button i {
+    margin: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .action {
+    font-size: 1.1rem;
+  }
+
+  .value {
     font-size: 1rem;
   }
 }
