@@ -16,7 +16,7 @@ export const cardData = {
     },
     {
       title: "Insertion Sort",
-      img: "./assets/sorting/selection-sort.svg",
+      img: "./assets/sorting/insertion-sort.svg",
       desc: "Takes each element and inserts it into its correct position in the sorted part.",
       id: "insertionSort",
       buttonText: "Try Insertion Sort",

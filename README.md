@@ -23,6 +23,7 @@ This project focuses on learning by seeing, not just memorizing code.
 
 - Bubble Sort
 - Selection Sort
+- Insertion Sort
 
 ## 🛠️ Tech Stack
 

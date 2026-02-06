@@ -210,7 +210,7 @@ input::placeholder {
   align-items: center;
   margin: 0.5rem;
   color: var(--text-primary);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
 }
 
@@ -370,4 +370,8 @@ input::placeholder {
 
 #executionStepContianer {
   display: none;
+}
+
+.select-key {
+  background-color: #f59e0b;
 }
