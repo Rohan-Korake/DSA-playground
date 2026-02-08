@@ -166,12 +166,19 @@ input::placeholder {
   color: var(--text-secondary);
 }
 
-.execution-step-container {
-  width: 99%;
+.execution-box-wrapper {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2.5rem 0;
+}
+
+.execution-step-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2.5rem 1.5rem;
   padding: 0 0.5rem;
 }
 
@@ -184,7 +191,7 @@ input::placeholder {
   background-color: var(--bg-card);
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   margin: 0.5rem 1rem;
 }
 
@@ -310,7 +317,8 @@ input::placeholder {
   }
 
   .execution-step-container {
-    width: 94%;
+    width: 100%;
+    margin: 2.5rem 0;
   }
 
   .heading-contianer,
