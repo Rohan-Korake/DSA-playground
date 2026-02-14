@@ -381,5 +381,28 @@ input::placeholder {
 }
 
 .select-key {
-  background-color: #f59e0b;
+  background-color: #c3ff00;
+}
+
+.pivot {
+  background-color: #c3ff00;
+}
+
+.swap {
+  background-color: #a1cb18;
+}
+
+.left-part {
+  background-color: #93c5fd;
+  color: #000;
+}
+
+.right-part {
+  background-color: #fca5a5;
+  color: #000;
+}
+
+.dividing {
+  background-color: #a78bfa;
+  color: #fff;
 }
