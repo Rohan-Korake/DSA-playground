@@ -1,4 +1,11 @@
-import { isTerminated } from "./controller.js";
+import {
+  updateWorkingStatus,
+  updateExecutionSteps,
+  isTerminated,
+  swapVisual,
+  sleep,
+  showTermination,
+} from "./controller.js";
 
 export async function sortingMethod(selectedAlgo) {
   const inputBox = document.getElementById("inputBox").value;
@@ -34,6 +41,7 @@ async function bubbleSort(numbers, boxes) {
 
       if (numbers[j] > numbers[j + 1]) {
         await swapVisual(numbers, boxes, j, j + 1);
+        await sleep(2500);
       }
 
       boxes[j].classList.remove("compare");
@@ -76,7 +84,7 @@ async function selectionSort(numbers, boxes) {
 
     if (minIndex !== i) {
       await swapVisual(numbers, boxes, i, minIndex);
-      await sleep(600);
+      await sleep(2500);
     }
 
     boxes[i].classList.remove("current");
@@ -100,7 +108,8 @@ async function insertionSort(numbers, boxes) {
     let j = i - 1;
 
     boxes[i].classList.add("select-key");
-    updateWorkingStatus("Select Key", key);
+    updateExecutionSteps(numbers, "Select Key", key);
+
     await sleep(2500);
 
     while (j >= 0 && numbers[j] > key) {
@@ -177,6 +186,7 @@ async function mergeSort(numbers, boxes) {
   showTermination(boxes, numbers);
 }
 
+//recursive funtion for merge sort
 async function mergeSortHelper(numbers, boxes, left, right) {
   if (left >= right || isTerminated) return;
 
@@ -213,6 +223,7 @@ async function mergeSortHelper(numbers, boxes, left, right) {
   await merge(numbers, boxes, left, mid, right);
 }
 
+//merage option for merge sort
 async function merge(numbers, boxes, left, mid, right) {
   let leftPart = numbers.slice(left, mid + 1);
   let rightPart = numbers.slice(mid + 1, right + 1);
@@ -302,133 +313,7 @@ async function merge(numbers, boxes, left, mid, right) {
   }
 }
 
-// Reset step counter
-export function resetStepCount() {
-  stepCount = -1;
-}
-
-// Sleep helper
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-// Update execution step
-const executionStep = document.getElementById("executionStep");
-let stepCount = -1;
-function updateExecutionSteps(numbers, action, type, operand1, operand2) {
-  stepCount++;
-  const stepAction = document.createElement("div");
-  stepAction.className = "action";
-
-  if (action === "Start" || action === "Stop") {
-    stepAction.innerText = `${action} ${type}`;
-    updateWorkingStatus(action, type);
-  }
-
-  if (action === "Compare") {
-    stepAction.innerText = `Step ${stepCount} : Compare ${operand1} and ${operand2}`;
-    updateWorkingStatus("Compare", "sorting", operand1, operand2);
-  }
-
-  if (action === "Swap") {
-    stepAction.innerText = `Step ${stepCount} : Swap ${operand1} and ${operand2}`;
-    updateWorkingStatus("Swap", "sorting", operand1, operand2);
-  }
-
-  if (action === "Shift") {
-    stepAction.innerText = `Step ${stepCount} : Shift ${operand1} to Right`;
-    updateWorkingStatus("Shift", "sorting", operand1, operand2);
-  }
-
-  if (action === "Insert") {
-    stepAction.innerText = `Step ${stepCount} : Insert ${operand1}`;
-  }
-
-  if (action === "Divide") {
-    stepAction.innerText = `Step ${stepCount} : Divide ${operand1}`;
-    updateWorkingStatus("Dividing", operand1);
-  }
-
-  if (action === "Merge") {
-    stepAction.innerText = `Step ${stepCount} : Merge ${operand1}`;
-    updateWorkingStatus("Merging", operand1);
-  }
-
-  if (action === "Place") {
-    stepAction.innerText = `Step ${stepCount} : Place ${operand1}`;
-    updateWorkingStatus("Placed", operand1);
-  }
-
-  const stepValue = document.createElement("div");
-  stepValue.className = "value";
-  stepValue.innerText = numbers.join("   |   ");
-
-  executionStep.appendChild(stepAction);
-  executionStep.appendChild(stepValue);
-  executionStep.appendChild(document.createElement("br"));
-}
-
-// Update working status
-const workingStatus = document.getElementById("workingStatus");
-function updateWorkingStatus(action, type, operand1, operand2) {
-  if (operand1 == null && operand2 == null) {
-    workingStatus.innerText = `${action} ${type}`;
-    return;
-  }
-  if (action === "Shift") {
-    workingStatus.innerText = `${action} ${operand1} to Right`;
-    return;
-  }
-
-  if (action === "Pivot Selected") {
-    workingStatus.innerText = `${action} ${operand1}`;
-    return;
-  }
-
-  if (action === "Dividing") {
-    workingStatus.innerText = `🔀 Dividing Array ${type}`;
-    return;
-  }
-
-  if (action === "Merging") {
-    workingStatus.innerText = `🔗 Merging ${type}`;
-    return;
-  }
-
-  if (action === "Placed") {
-    workingStatus.innerText = `✓ Placed ${type}`;
-    return;
-  }
-
-  workingStatus.innerText = `${action} ${operand1} & ${operand2}`;
-}
-
-// Swap visual with pre-swap numbers
-async function swapVisual(numbers, boxes, i, j) {
-  if (isTerminated) return;
-
-  // Swap numbers
-  let temp = numbers[i];
-  numbers[i] = numbers[j];
-  numbers[j] = temp;
-
-  updateExecutionSteps(numbers, "Swap", "Sorting", numbers[i], numbers[j]);
-
-  boxes[i].innerText = numbers[i];
-  boxes[j].innerText = numbers[j];
-}
-
-// Show execution complete
-function showTermination(boxes, numbers) {
-  updateWorkingStatus("Stop", "sorting");
-  updateExecutionSteps(numbers, "Stop", "Sorting");
-
-  boxes.forEach((box) => {
-    if (isTerminated) return;
-    box.classList.add("sorted");
-  });
-}
-
+//partitioning module for insertion sort
 async function partition(numbers, boxes, low, high) {
   let pivot = numbers[high];
   boxes[high].classList.add("pivot");

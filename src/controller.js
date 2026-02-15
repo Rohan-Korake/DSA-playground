@@ -2,7 +2,6 @@ import { selectedAlgo } from "./renderAlgorithm.js";
 import { sortingMethod } from "./sorting.js";
 import { searchingMethod } from "./searching.js";
 import { simulationMethod } from "./simulation.js";
-import { resetStepCount } from "./sorting.js";
 
 export let isTerminated = false;
 
@@ -74,6 +73,7 @@ export function controller() {
     }
   });
 
+  //generate element boxes
   function createBlock(ele) {
     const box = document.createElement("div");
     box.className = "box";
@@ -139,4 +139,141 @@ export function resetAlgorithmState() {
   executionStepContianer.style.display = "none";
   isTerminated = true;
   workingStatus.innerText = "Ready to Start";
+}
+
+// Update execution step
+const executionStep = document.getElementById("executionStep");
+let stepCount = -1;
+export function updateExecutionSteps(
+  numbers,
+  action,
+  type,
+  operand1,
+  operand2,
+) {
+  stepCount++;
+  const stepAction = document.createElement("div");
+  stepAction.className = "action";
+
+  if (action === "Start" || action === "Stop") {
+    stepAction.innerText = `${action} ${type}`;
+    updateWorkingStatus(action, type);
+  }
+
+  if (action === "Compare") {
+    stepAction.innerText = `Step ${stepCount} : Compare ${operand1} and ${operand2}`;
+    updateWorkingStatus("Compare", "sorting", operand1, operand2);
+  }
+
+  if (action === "Swap") {
+    stepAction.innerText = `Step ${stepCount} : Swap ${operand1} and ${operand2}`;
+    updateWorkingStatus("Swap", "sorting", operand1, operand2);
+  }
+
+  if (action === "Shift") {
+    stepAction.innerText = `Step ${stepCount} : Shift ${operand1} to Right`;
+    updateWorkingStatus("Shift", "sorting", operand1, operand2);
+  }
+
+  if (action === "Insert") {
+    stepAction.innerText = `Step ${stepCount} : Insert ${operand1}`;
+  }
+
+  if (action === "Divide") {
+    stepAction.innerText = `Step ${stepCount} : Divide ${operand1}`;
+    updateWorkingStatus("Dividing", operand1);
+  }
+
+  if (action === "Merge") {
+    stepAction.innerText = `Step ${stepCount} : Merge ${operand1}`;
+    updateWorkingStatus("Merging", operand1);
+  }
+
+  if (action === "Place") {
+    stepAction.innerText = `Step ${stepCount} : Place ${operand1}`;
+    updateWorkingStatus("Placed", operand1);
+  }
+
+  if (action == "Select Key") {
+    stepAction.innerText = `Step ${stepCount} : ${action} ${type}`;
+    updateWorkingStatus("Select Key", type);
+  }
+  const stepValue = document.createElement("div");
+  stepValue.className = "value";
+  stepValue.innerText = numbers.join("   |   ");
+
+  executionStep.appendChild(stepAction);
+  executionStep.appendChild(stepValue);
+  executionStep.appendChild(document.createElement("br"));
+}
+
+// Update working status
+const workingStatus = document.getElementById("workingStatus");
+export function updateWorkingStatus(action, type, operand1, operand2) {
+  if (operand1 == null && operand2 == null) {
+    workingStatus.innerText = `${action} ${type}`;
+    return;
+  }
+  if (action === "Shift") {
+    workingStatus.innerText = `${action} ${operand1} to Right`;
+    return;
+  }
+
+  if (action === "Pivot Selected") {
+    workingStatus.innerText = `${action} ${operand1}`;
+    return;
+  }
+
+  if (action === "Dividing") {
+    workingStatus.innerText = `Dividing Array ${type}`;
+    return;
+  }
+
+  if (action === "Merging") {
+    workingStatus.innerText = ` Merging ${type}`;
+    return;
+  }
+
+  if (action === "Placed") {
+    workingStatus.innerText = ` Placed ${type}`;
+    return;
+  }
+
+  workingStatus.innerText = `${action} ${operand1} & ${operand2}`;
+}
+
+// Reset step counter
+function resetStepCount() {
+  stepCount = -1;
+}
+
+// Sleep helper
+export function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Swap visual with pre-swap numbers
+export async function swapVisual(numbers, boxes, i, j) {
+  if (isTerminated) return;
+
+  // Swap numbers
+  let temp = numbers[i];
+  numbers[i] = numbers[j];
+  numbers[j] = temp;
+
+  updateExecutionSteps(numbers, "Swap", "Sorting", numbers[i], numbers[j]);
+
+  boxes[i].innerText = numbers[i];
+  boxes[j].innerText = numbers[j];
+}
+
+// Show execution complete
+export function showTermination(boxes, numbers) {
+  updateWorkingStatus("Stop", "sorting");
+  updateExecutionSteps(numbers, "Stop", "Sorting");
+
+  boxes.forEach((box) => {
+    if (isTerminated) return;
+    box.classList.add("sorted");
+  });
 }

@@ -24,7 +24,7 @@ function loadData(algoName) {
   title.innerText = algoData.title;
   description.innerText = algoData.description;
   category.innerText = algoData.category;
-  level.innerText = algoData.level;
+  level.innerText = algoData.difficulty;
   approach.innerText = algoData.approach;
   spaceComp.innerText = algoData.space;
   bestCase.innerText = algoData.time.best;
