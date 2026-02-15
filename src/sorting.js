@@ -1,5 +1,4 @@
 import {
-  updateWorkingStatus,
   updateExecutionSteps,
   isTerminated,
   swapVisual,
@@ -163,6 +162,7 @@ async function quickSort(numbers, boxes) {
 
     if (low < high) {
       let pivotIndex = await partition(numbers, boxes, low, high);
+      console.log(pivotIndex);
 
       // Mark pivot as sorted
       boxes[pivotIndex].classList.remove("pivot");
@@ -318,7 +318,7 @@ async function partition(numbers, boxes, low, high) {
   let pivot = numbers[high];
   boxes[high].classList.add("pivot");
 
-  updateWorkingStatus("Pivot Selected", "", pivot, "");
+  updateExecutionSteps(numbers, "Pivot", "Sorting", numbers[high], "");
   await sleep(2500);
 
   let i = low - 1;
@@ -337,10 +337,8 @@ async function partition(numbers, boxes, low, high) {
       boxes[i].classList.add("swap");
       boxes[j].classList.add("swap");
 
-      updateExecutionSteps(numbers, "Swap", "Sorting", numbers[i], numbers[j]);
-      await sleep(2500);
-
       await swapVisual(numbers, boxes, i, j);
+      await sleep(2500);
 
       boxes[i].classList.remove("swap");
       boxes[j].classList.remove("swap");
@@ -360,8 +358,6 @@ async function partition(numbers, boxes, low, high) {
     numbers[high],
   );
   await sleep(2500);
-
-  await swapVisual(numbers, boxes, i + 1, high);
 
   boxes[i + 1].classList.remove("swap");
   boxes[high].classList.remove("swap");

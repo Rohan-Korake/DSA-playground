@@ -41,6 +41,10 @@ export function initNavbar() {
     visualizerContainer.addEventListener(
       "animationend",
       function _hideViz() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
         visualizerContainer.style.display = "none";
         visualizerContainer.classList.remove("hide-wave");
         visualizerContainer.removeEventListener("animationend", _hideViz);
@@ -68,6 +72,10 @@ export function initNavbar() {
     homePage.addEventListener(
       "animationend",
       function _hideHome() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
         homePage.style.display = "none";
         homePage.classList.remove("hide-wave");
         homePage.removeEventListener("animationend", _hideHome);

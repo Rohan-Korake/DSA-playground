@@ -184,6 +184,11 @@ export function updateExecutionSteps(
     updateWorkingStatus("Dividing", operand1);
   }
 
+  if (action == "Pivot") {
+    stepAction.innerText = `Step ${stepCount} : Pivot Selected ${operand1}`;
+    updateWorkingStatus("Pivot Selected", "", operand1);
+  }
+
   if (action === "Merge") {
     stepAction.innerText = `Step ${stepCount} : Merge ${operand1}`;
     updateWorkingStatus("Merging", operand1);
@@ -198,6 +203,7 @@ export function updateExecutionSteps(
     stepAction.innerText = `Step ${stepCount} : ${action} ${type}`;
     updateWorkingStatus("Select Key", type);
   }
+
   const stepValue = document.createElement("div");
   stepValue.className = "value";
   stepValue.innerText = numbers.join("   |   ");
@@ -209,7 +215,7 @@ export function updateExecutionSteps(
 
 // Update working status
 const workingStatus = document.getElementById("workingStatus");
-export function updateWorkingStatus(action, type, operand1, operand2) {
+function updateWorkingStatus(action, type, operand1, operand2) {
   if (operand1 == null && operand2 == null) {
     workingStatus.innerText = `${action} ${type}`;
     return;
