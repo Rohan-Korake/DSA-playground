@@ -26,6 +26,7 @@ This project focuses on learning by seeing, not just memorizing code.
 - Insertion Sort
 - Quick Sort
 - Merge Sort
+- Binary Search
 
 ## 🛠️ Tech Stack
 

@@ -65,6 +65,13 @@ export function initNavbar() {
     const cardButton = e.target.closest(".try-button");
     if (!cardButton) return;
 
+    const searchAlgos = ["linearSearch", "binarySearch"];
+    const inputTarget = document.getElementById("inputTarget");
+
+    inputTarget.style.display = searchAlgos.includes(cardButton.id)
+      ? "flex"
+      : "none";
+
     homePage.classList.remove("show-wave");
     homePage.classList.add("hide-wave");
 

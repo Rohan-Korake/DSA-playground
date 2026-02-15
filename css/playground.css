@@ -90,6 +90,10 @@
   font-size: 1.4rem;
 }
 
+#inputTarget {
+  display: none;
+}
+
 input::placeholder {
   color: var(--text-tertiary);
   font-size: 1rem;

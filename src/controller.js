@@ -2,7 +2,6 @@ import { selectedAlgo } from "./renderAlgorithm.js";
 import { sortingMethod } from "./sorting.js";
 import { searchingMethod } from "./searching.js";
 import { simulationMethod } from "./simulation.js";
-
 export let isTerminated = false;
 
 export function controller() {
@@ -21,6 +20,18 @@ export function controller() {
 
   // handle start button functionality
   start.addEventListener("click", function () {
+    const inputBox = document.getElementById("inputBox").value;
+    if (inputBox === "") {
+      alert("Enter input numbers!");
+      return;
+    }
+    const tragetElement = document.getElementById("inputTarget").value;
+    const searchAlgos = ["linearSearch", "binarySearch"];
+    if (searchAlgos.includes(selectedAlgo) && tragetElement === "") {
+      alert("Enter target element");
+      return;
+    }
+
     if (isExecuting) return;
     cardId = 0;
     isExecuting = true;
@@ -28,13 +39,7 @@ export function controller() {
     executionStep.innerHTML = "";
     algorithmVisualizer.innerHTML = "";
     resetStepCount();
-    const inputBox = document.getElementById("inputBox").value;
     const numbers = inputBox.split(" ").map(Number);
-
-    if (inputBox === "") {
-      alert("Enter input numbers!");
-      return;
-    }
 
     for (let num of numbers) {
       if (num <= 0) {
@@ -45,6 +50,7 @@ export function controller() {
       createBlock(num);
     }
     executionStepContianer.style.display = "block";
+
     start.disabled = true;
     startVisualization();
   });
@@ -133,7 +139,10 @@ export function resetAlgorithmState() {
     "executionStepContianer",
   );
   const workingStatus = document.getElementById("workingStatus");
+  const inputTarget = document.getElementById("inputTarget");
+
   inputBox.value = "";
+  inputTarget.value = "";
   algorithmVisualizer.innerHTML = "";
   executionStep.innerHTML = "";
   executionStepContianer.style.display = "none";
@@ -155,7 +164,7 @@ export function updateExecutionSteps(
   const stepAction = document.createElement("div");
   stepAction.className = "action";
 
-  if (action === "Start" || action === "Stop") {
+  if (action === "Start" || action === "Stop" || action === "Sorting") {
     stepAction.innerText = `${action} ${type}`;
     updateWorkingStatus(action, type);
   }
@@ -204,6 +213,36 @@ export function updateExecutionSteps(
     updateWorkingStatus("Select Key", type);
   }
 
+  if (action == "Check") {
+    stepAction.innerText = `Step ${stepCount} : Comapre ${numbers[type]} with ${operand1} & mid = ${type}`;
+    updateWorkingStatus("Compare", "sorting", numbers[type], operand1);
+  }
+
+  if (action == "Target") {
+    stepAction.innerText = `Start Searching with ${action} Element ${type} `;
+    updateWorkingStatus(action, type);
+  }
+
+  if (action == "Found") {
+    stepAction.innerText = `Step ${stepCount} : Element ${numbers[type]} found at index ${type}`;
+    updateWorkingStatus(action, type);
+  }
+
+  if (action == "NotFound") {
+    stepAction.innerText = `Step ${stepCount} : Target not found. Return value -1`;
+    updateWorkingStatus(action, "-1");
+  }
+
+  if (action == "low") {
+    stepAction.innerText = `Step ${stepCount}: ${numbers[operand1]} < ${operand2}, so Low + 1 = ${type}`;
+    updateWorkingStatus(action, type);
+  }
+
+  if (action == "high") {
+    stepAction.innerText = `Step ${stepCount} : ${numbers[operand1]} > ${operand2}, so high = mid - 1 = ${type}`;
+    updateWorkingStatus(action, type);
+  }
+
   const stepValue = document.createElement("div");
   stepValue.className = "value";
   stepValue.innerText = numbers.join("   |   ");
@@ -216,10 +255,6 @@ export function updateExecutionSteps(
 // Update working status
 const workingStatus = document.getElementById("workingStatus");
 function updateWorkingStatus(action, type, operand1, operand2) {
-  if (operand1 == null && operand2 == null) {
-    workingStatus.innerText = `${action} ${type}`;
-    return;
-  }
   if (action === "Shift") {
     workingStatus.innerText = `${action} ${operand1} to Right`;
     return;
@@ -245,11 +280,35 @@ function updateWorkingStatus(action, type, operand1, operand2) {
     return;
   }
 
+  if (action == "Found") {
+    workingStatus.innerText = `Element Found at index ${type}`;
+    return;
+  }
+
+  if (action == "NotFound") {
+    workingStatus.innerText = `Element Not found returns ${type}`;
+    return;
+  }
+
+  if (action == "low") {
+    workingStatus.innerText = `Mid < Target, so Low + 1 = ${type}`;
+    return;
+  }
+
+  if (action == "high") {
+    workingStatus.innerText = `Mid > Target, so Low - 1 = ${type}`;
+    return;
+  }
+
+  if (operand1 == null && operand2 == null) {
+    workingStatus.innerText = `${action} ${type}`;
+    return;
+  }
   workingStatus.innerText = `${action} ${operand1} & ${operand2}`;
 }
 
 // Reset step counter
-function resetStepCount() {
+export function resetStepCount() {
   stepCount = -1;
 }
 

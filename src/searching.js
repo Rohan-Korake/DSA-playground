@@ -1,4 +1,9 @@
-import { isTerminated } from "./controller.js";
+import {
+  updateExecutionSteps,
+  isTerminated,
+  sleep,
+  resetStepCount,
+} from "./controller.js";
 
 export async function searchingMethod(selectedAlgo) {
   const inputBox = document.getElementById("inputBox").value;
@@ -11,9 +16,11 @@ export async function searchingMethod(selectedAlgo) {
 async function binarySearch(numbers, boxes) {
   if (isTerminated) return;
 
+  updateExecutionSteps(numbers, "Start", "Sorting for Binary Search");
+  await sleep(2500);
+
   for (let i = 0; i < numbers.length; i++) {
     for (let j = 0; j < numbers.length - 1; j++) {
-      await sleep(1000);
       if (numbers[j] > numbers[j + 1]) {
         let temp = numbers[j];
         numbers[j] = numbers[j + 1];
@@ -23,4 +30,36 @@ async function binarySearch(numbers, boxes) {
       }
     }
   }
+  updateExecutionSteps(numbers, "Sorting", "Completed");
+  resetStepCount();
+  await sleep(1500);
+  if (isTerminated) return;
+
+  const tragetElement = document.getElementById("inputTarget").value;
+  updateExecutionSteps(numbers, "Target", tragetElement);
+  let low = 0,
+    mid = 0;
+  let high = numbers.length - 1;
+  await sleep(2500);
+
+  while (low <= high) {
+    mid = Math.floor((low + high) / 2);
+    updateExecutionSteps(numbers, "Check", mid, tragetElement);
+    await sleep(2500);
+
+    if (numbers[mid] == tragetElement) {
+      boxes[mid].classList.add("pivot");
+      updateExecutionSteps(numbers, "Found", mid);
+      return;
+    } else if (numbers[mid] < tragetElement) {
+      low = mid + 1;
+      updateExecutionSteps(numbers, "low", low, mid, tragetElement);
+      await sleep(2500);
+    } else {
+      high = mid - 1;
+      updateExecutionSteps(numbers, "high", high, mid, tragetElement);
+      await sleep(2500);
+    }
+  }
+  updateExecutionSteps(numbers, "NotFound", mid);
 }

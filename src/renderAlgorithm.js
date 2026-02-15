@@ -19,8 +19,9 @@ export function renderAlgo() {
 
 let selectedAlgo;
 function loadData(algoName) {
-  selectedAlgo = algoName;
   const algoData = algorithms[algoName];
+  if (!algoData) return;
+  selectedAlgo = algoName;
   title.innerText = algoData.title;
   description.innerText = algoData.description;
   category.innerText = algoData.category;
