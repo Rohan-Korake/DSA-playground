@@ -11,6 +11,7 @@ export async function searchingMethod(selectedAlgo) {
   const boxes = document.querySelectorAll("#algorithmVisualizer .box");
 
   if (selectedAlgo === "binarySearch") await binarySearch(numbers, boxes);
+  if (selectedAlgo === "linearSearch") await linearSearch(numbers, boxes);
 }
 
 async function binarySearch(numbers, boxes) {
@@ -45,6 +46,7 @@ async function binarySearch(numbers, boxes) {
   while (low <= high) {
     mid = Math.floor((low + high) / 2);
     updateExecutionSteps(numbers, "Check", mid, tragetElement);
+    boxes[mid].classList.add("compare");
     await sleep(2500);
 
     if (numbers[mid] == tragetElement) {
@@ -60,6 +62,37 @@ async function binarySearch(numbers, boxes) {
       updateExecutionSteps(numbers, "high", high, mid, tragetElement);
       await sleep(2500);
     }
+    boxes[mid].classList.remove("compare");
   }
   updateExecutionSteps(numbers, "NotFound", mid);
+}
+
+async function linearSearch(numbers, boxes) {
+  if (isTerminated) return;
+
+  const tragetElement = document.getElementById("inputTarget").value;
+  updateExecutionSteps(numbers, "Target", tragetElement);
+  await sleep(2500);
+
+  for (let i = 0; i < numbers.length; i++) {
+    updateExecutionSteps(
+      numbers,
+      "Compare",
+      "Searching",
+      numbers[i],
+      tragetElement,
+    );
+    boxes[i].classList.add("compare");
+
+    await sleep(2500);
+
+    if (numbers[i] == tragetElement) {
+      boxes[i].classList.add("pivot");
+      updateExecutionSteps(numbers, "Found", i);
+      await sleep(2500);
+      return;
+    }
+    boxes[i].classList.remove("compare");
+  }
+  updateExecutionSteps(numbers, "NotFound");
 }
