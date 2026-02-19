@@ -225,6 +225,8 @@ async function mergeSortHelper(numbers, boxes, left, right) {
 
 //merage option for merge sort
 async function merge(numbers, boxes, left, mid, right) {
+  if (isTerminated) return;
+
   let leftPart = numbers.slice(left, mid + 1);
   let rightPart = numbers.slice(mid + 1, right + 1);
 
@@ -315,6 +317,8 @@ async function merge(numbers, boxes, left, mid, right) {
 
 //partitioning module for insertion sort
 async function partition(numbers, boxes, low, high) {
+  if (isTerminated) return;
+
   let pivot = numbers[high];
   boxes[high].classList.add("pivot");
 

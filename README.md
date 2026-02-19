@@ -28,6 +28,7 @@ This project focuses on learning by seeing, not just memorizing code.
 - Merge Sort
 - Binary Search
 - Linear Search
+- Stack Simulation
 
 ## 🛠️ Tech Stack
 

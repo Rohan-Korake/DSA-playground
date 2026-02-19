@@ -2,8 +2,11 @@ import { selectedAlgo } from "./renderAlgorithm.js";
 import { sortingMethod } from "./sorting.js";
 import { searchingMethod } from "./searching.js";
 import { simulationMethod } from "./simulation.js";
+import { algorithms } from "./algorithmData.js";
 export let isTerminated = false;
 
+export let cardId = 0,
+  isExecuting = false;
 export function controller() {
   const start = document.getElementById("start");
   const random = document.getElementById("random");
@@ -15,43 +18,64 @@ export function controller() {
   );
 
   const executionStep = document.getElementById("executionStep");
-  let cardId = 0,
-    isExecuting = false;
 
   // handle start button functionality
   start.addEventListener("click", function () {
-    const inputBox = document.getElementById("inputBox").value;
-    if (inputBox === "") {
+    const inputValue = document.getElementById("inputBox").value.trim();
+    const targetValue = document.getElementById("inputTarget").value.trim();
+
+    const searchAlgos = ["linearSearch", "binarySearch"];
+
+    if (inputValue === "") {
       alert("Enter input numbers!");
       return;
     }
-    const tragetElement = document.getElementById("inputTarget").value;
-    const searchAlgos = ["linearSearch", "binarySearch"];
-    if (searchAlgos.includes(selectedAlgo) && tragetElement === "") {
-      alert("Enter target element");
+
+    const validPattern = /^[0-9]+( [0-9]+)*$/;
+
+    if (!validPattern.test(inputValue)) {
+      alert("Enter only positive numbers separated by single space!");
       return;
     }
 
+    const numbers = inputValue.split(" ").map(Number);
+
+    for (let num of numbers) {
+      if (num <= 0) {
+        alert("Enter positive numbers only!");
+        isTerminated = true;
+        return;
+      }
+    }
+
+    if (searchAlgos.includes(selectedAlgo)) {
+      if (targetValue === "") {
+        alert("Enter target element!");
+        return;
+      }
+
+      if (!/^[0-9]+$/.test(targetValue)) {
+        alert("Target must be a positive number!");
+        return;
+      }
+    }
+
     if (isExecuting) return;
+
     cardId = 0;
     isExecuting = true;
     isTerminated = false;
     executionStep.innerHTML = "";
     algorithmVisualizer.innerHTML = "";
     resetStepCount();
-    const numbers = inputBox.split(" ").map(Number);
 
     for (let num of numbers) {
-      if (num <= 0) {
-        alert("Enter positive numbers!");
-        algorithmVisualizer.innerHTML = "";
-        return;
-      }
       createBlock(num);
     }
-    executionStepContianer.style.display = "block";
 
+    executionStepContianer.style.display = "block";
     start.disabled = true;
+
     startVisualization();
   });
 
@@ -78,15 +102,28 @@ export function controller() {
       inputBox.value = arr.join(" ");
     }
   });
+}
 
-  //generate element boxes
-  function createBlock(ele) {
-    const box = document.createElement("div");
-    box.className = "box";
-    box.id = cardId += 1;
-    box.innerText = ele;
-    algorithmVisualizer.appendChild(box);
-  }
+//generate element boxes
+export function createBlock(ele) {
+  const box = document.createElement("div");
+  box.className = "box";
+  box.id = cardId += 1;
+  box.innerText = ele;
+  algorithmVisualizer.appendChild(box);
+}
+
+export function insertElement(ele) {
+  const box = document.createElement("div");
+  box.className = "box";
+  box.id = cardId += 1;
+  box.innerText = ele;
+  algorithmVisualizer.prepend(box);
+  return box;
+}
+
+export function removeBlock(ele) {
+  algorithmVisualizer.removeChild(algorithmVisualizer.lastElementChild);
 }
 
 //assign correct algorithm process
@@ -132,22 +169,17 @@ copyBtn.addEventListener("click", async function () {
 });
 
 export function resetAlgorithmState() {
-  const algorithmVisualizer = document.getElementById("algorithmVisualizer");
-  const inputBox = document.getElementById("inputBox");
-  const executionStep = document.getElementById("executionStep");
-  const executionStepContianer = document.getElementById(
-    "executionStepContianer",
-  );
-  const workingStatus = document.getElementById("workingStatus");
-  const inputTarget = document.getElementById("inputTarget");
-
-  inputBox.value = "";
-  inputTarget.value = "";
-  algorithmVisualizer.innerHTML = "";
-  executionStep.innerHTML = "";
-  executionStepContianer.style.display = "none";
   isTerminated = true;
-  workingStatus.innerText = "Ready to Start";
+  document.getElementById("algorithmVisualizer").innerHTML = "";
+  document.getElementById("inputBox").value = "";
+  document.getElementById("executionStep").innerHTML = "";
+  document.getElementById("executionStepContianer").style.display = "none";
+  document.getElementById("workingStatus").innerText = "Ready to Start";
+  document.getElementById("inputTarget").value = "";
+  document.getElementById("operationControls").style.display = "none";
+  document.querySelector(
+    ".algorithm-visualizer-container",
+  ).style.flexDirection = "row";
 }
 
 // Update execution step
@@ -241,6 +273,16 @@ export function updateExecutionSteps(
   if (action == "high") {
     stepAction.innerText = `Step ${stepCount} : ${numbers[operand1]} > ${operand2}, so high = mid - 1 = ${type}`;
     updateWorkingStatus(action, type);
+  }
+
+  if (action == "Push" || action == "Pop") {
+    stepAction.innerText = `Step ${stepCount + 1} : ${action} ${operand1} at Top ${type}`;
+    updateWorkingStatus(action, operand1);
+  }
+
+  if (action == "Underflow" || action == "Overflow") {
+    stepAction.innerText = `Step ${stepCount + 1} : ${type} ${action} Size ${operand1}`;
+    updateWorkingStatus(action, operand1);
   }
 
   const stepValue = document.createElement("div");
