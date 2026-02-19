@@ -29,6 +29,7 @@ This project focuses on learning by seeing, not just memorizing code.
 - Binary Search
 - Linear Search
 - Stack Simulation
+- Queue Simulation
 
 ## 🛠️ Tech Stack
 

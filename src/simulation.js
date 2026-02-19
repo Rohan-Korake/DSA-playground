@@ -1,21 +1,21 @@
 import {
   updateExecutionSteps,
   isTerminated,
-  sleep,
-  resetStepCount,
   insertElement,
   removeBlock,
+  createBlock,
+  resetStepCount,
 } from "./controller.js";
 
 export async function simulationMethod(selectedAlgo) {
   const inputBox = document.getElementById("inputBox").value;
   const numbers = inputBox.split(" ").map(Number);
-  const boxes = document.querySelectorAll("#algorithmVisualizer .box");
 
-  if (selectedAlgo === "stackSimulation") await stackSimulation(numbers, boxes);
+  if (selectedAlgo === "stackSimulation") await stackSimulation(numbers);
+  if (selectedAlgo === "queueSimulation") await queueSimulation(numbers);
 }
 
-async function stackSimulation(numbers, boxes) {
+async function stackSimulation(numbers) {
   if (isTerminated) return;
   algorithmVisualizer.innerHTML = "";
 
@@ -30,33 +30,87 @@ async function stackSimulation(numbers, boxes) {
 
   let stack = [],
     stackPtr = -1,
-    arrayPtr = 0;
+    queuePtr = 0;
   let len = numbers.length;
 
-  insertBtn.addEventListener("click", function () {
+  insertBtn.onclick = function () {
     if (stackPtr + 1 == len) {
       updateExecutionSteps(stack, "Overflow", "Stack", stackPtr + 1);
       return;
     }
 
-    stack.push(numbers[arrayPtr]);
-    arrayPtr++;
+    stack.push(numbers[queuePtr]);
+    queuePtr++;
     stackPtr++;
     let box = insertElement(stack[stackPtr]);
     box.style.width = "180px";
-    updateExecutionSteps(stack, "Push", stackPtr, numbers[arrayPtr - 1]);
-  });
+    updateExecutionSteps(stack, "Push", stackPtr, numbers[queuePtr - 1]);
+  };
 
-  removeBtn.addEventListener("click", function () {
+  removeBtn.onclick = function () {
     if (stackPtr < 0) {
       updateExecutionSteps(stack, "Underflow", "Stack", stackPtr + 1);
       return;
     }
 
     stack.pop();
-    updateExecutionSteps(stack, "Pop", stackPtr, numbers[arrayPtr - 1]);
-    arrayPtr--;
+    updateExecutionSteps(stack, "Pop", stackPtr, numbers[queuePtr - 1]);
+    queuePtr--;
     stackPtr--;
-    removeBlock();
-  });
+    removeBlock("Stack");
+  };
+}
+
+async function queueSimulation(numbers) {
+  if (isTerminated) return;
+  algorithmVisualizer.innerHTML = "";
+
+  const insertBtn = document.getElementById("insertBtn");
+  const removeBtn = document.getElementById("removeBtn");
+  insertBtn.innerText = "Enqueue";
+  removeBtn.innerText = "Dequeue";
+  document.getElementById("operationControls").style.display = "flex";
+
+  let queue = [],
+    frontPtr = -1,
+    rearPrt = -1,
+    queuePtr = 0;
+
+  resetStepCount();
+  const len = numbers.length;
+
+  insertBtn.onclick = function () {
+    if (rearPrt === len - 1) {
+      updateExecutionSteps(queue, "Overflow", "Queue", len);
+      return;
+    }
+
+    if (frontPtr === -1) frontPtr = 0;
+
+    rearPrt++;
+    queue[rearPrt] = numbers[queuePtr];
+    createBlock(numbers[queuePtr]);
+
+    updateExecutionSteps(
+      queue,
+      "Enqueue",
+      numbers[queuePtr],
+      frontPtr,
+      rearPrt,
+    );
+
+    queuePtr++;
+  };
+
+  removeBtn.onclick = function () {
+    if (frontPtr == -1 || frontPtr > rearPrt) {
+      updateExecutionSteps(queue, "Underflow", "Queue", queuePtr);
+      return;
+    }
+
+    updateExecutionSteps(queue, "Dequeue", queue[frontPtr], frontPtr, rearPrt);
+
+    removeBlock("Queue");
+    frontPtr++;
+  };
 }

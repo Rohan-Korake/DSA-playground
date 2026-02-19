@@ -48,6 +48,7 @@ async function binarySearch(numbers, boxes) {
     updateExecutionSteps(numbers, "Check", mid, tragetElement);
     boxes[mid].classList.add("compare");
     await sleep(2500);
+    if (isTerminated) return;
 
     if (numbers[mid] == tragetElement) {
       boxes[mid].classList.add("pivot");
@@ -85,6 +86,7 @@ async function linearSearch(numbers, boxes) {
     boxes[i].classList.add("compare");
 
     await sleep(2500);
+    if (isTerminated) return;
 
     if (numbers[i] == tragetElement) {
       boxes[i].classList.add("pivot");

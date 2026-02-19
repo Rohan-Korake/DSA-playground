@@ -122,8 +122,13 @@ export function insertElement(ele) {
   return box;
 }
 
-export function removeBlock(ele) {
-  algorithmVisualizer.removeChild(algorithmVisualizer.lastElementChild);
+export function removeBlock(type) {
+  console.log(algorithmVisualizer);
+  if (type == "Queue") {
+    algorithmVisualizer.removeChild(algorithmVisualizer.firstElementChild);
+  } else if (type == "Stack") {
+    algorithmVisualizer.removeChild(algorithmVisualizer.lastElementChild);
+  }
 }
 
 //assign correct algorithm process
@@ -278,6 +283,11 @@ export function updateExecutionSteps(
   if (action == "Push" || action == "Pop") {
     stepAction.innerText = `Step ${stepCount + 1} : ${action} ${operand1} at Top ${type}`;
     updateWorkingStatus(action, operand1);
+  }
+
+  if (action == "Enqueue" || action == "Dequeue") {
+    stepAction.innerText = `Step ${stepCount + 1} : ${action} ${type}, Front ${operand1} & Rear ${operand2}`;
+    updateWorkingStatus(action, type);
   }
 
   if (action == "Underflow" || action == "Overflow") {
