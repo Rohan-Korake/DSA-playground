@@ -48,8 +48,9 @@
   justify-content: center;
 }
 
-.right-side {
-  margin: 0.5rem;
+.right-side,
+.left-side {
+  margin: 0.5rem 0;
 }
 
 .meta-item {
@@ -315,10 +316,11 @@ input::placeholder {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    flex-direction: column;
   }
 
   .right-side {
-    margin: 0 0.5rem;
+    margin: 0.5rem 0;
   }
 
   .input-field {

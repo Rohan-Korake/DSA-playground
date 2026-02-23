@@ -2,7 +2,7 @@ import { selectedAlgo } from "./renderAlgorithm.js";
 import { sortingMethod } from "./sorting.js";
 import { searchingMethod } from "./searching.js";
 import { simulationMethod } from "./simulation.js";
-import { algorithms } from "./algorithmData.js";
+import { arrays } from "./arrays.js";
 export let isTerminated = false;
 
 export let cardId = 0,
@@ -133,6 +133,11 @@ export function removeBlock(type) {
 
 //assign correct algorithm process
 function startVisualization() {
+  if (selectedAlgo == "oneDimensionalArray") {
+    arrays(selectedAlgo);
+    return;
+  }
+
   if (
     selectedAlgo == "bubbleSort" ||
     selectedAlgo == "selectionSort" ||
@@ -204,6 +209,11 @@ export function updateExecutionSteps(
   if (action === "Start" || action === "Stop" || action === "Sorting") {
     stepAction.innerText = `${action} ${type}`;
     updateWorkingStatus(action, type);
+  }
+
+  if (action == "Access") {
+    stepAction.innerText = `Step ${stepCount} : ${action} ${type} ${operand1} [${operand2}]`;
+    updateWorkingStatus(action, type, operand1, operand2);
   }
 
   if (action === "Compare") {
@@ -309,6 +319,11 @@ const workingStatus = document.getElementById("workingStatus");
 function updateWorkingStatus(action, type, operand1, operand2) {
   if (action === "Shift") {
     workingStatus.innerText = `${action} ${operand1} to Right`;
+    return;
+  }
+
+  if (action == "Access") {
+    workingStatus.innerText = `${action} ${type} ${operand1} [${operand2}]`;
     return;
   }
 

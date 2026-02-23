@@ -1,4 +1,19 @@
 export const algorithms = {
+  oneDimensionalArray: {
+    title: "One Dimensional Array",
+    description:
+      "A linear data structure that stores elements of the same type in contiguous memory locations and is accessed using a single index.",
+    category: "Array",
+    difficulty: "Easy",
+    approach: "Index-based Access",
+    space: "O(n)",
+    time: {
+      best: "O(1)",
+      average: "O(n × m)",
+      worst: "O(n × m)",
+    },
+  },
+
   bubbleSort: {
     title: "Bubble Sort",
     description:

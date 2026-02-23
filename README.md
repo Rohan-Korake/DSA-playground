@@ -21,6 +21,7 @@ This project focuses on learning by seeing, not just memorizing code.
 
 ## ✅ Finished Components
 
+- 1D Array
 - Bubble Sort
 - Selection Sort
 - Insertion Sort

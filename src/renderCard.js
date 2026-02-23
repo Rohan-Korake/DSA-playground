@@ -33,7 +33,8 @@ export function initCards() {
     cardContainer.appendChild(frag);
   }
   // initial render: clear first, then append other categories so both are visible
-  renderCards("sorting", false);
+  renderCards("arrys", false);
+  renderCards("sorting");
   renderCards("searching");
   renderCards("Buffering");
 }

@@ -1,4 +1,14 @@
 export const cardData = {
+  arrys: [
+    {
+      title: "1D Array",
+      img: "./assets/arrays/one-dimensional.svg",
+      desc: "Stores elements in a linear order accessed by a single index position.",
+      id: "oneDimensionalArray",
+      buttonText: "Try 1D Array",
+    },
+  ],
+
   sorting: [
     {
       title: "Bubble Sort",
