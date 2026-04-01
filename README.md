@@ -4,12 +4,11 @@
 
 <h1 align="center">DSA Playground</h1>
 
-# 📘 DSA Playground
+# DSA Playground
 
 DSA Playground is a visual learning platform designed to help students understand Data Structures and Algorithms step by step through animations and execution logs.
-This project focuses on learning by seeing, not just memorizing code.
 
-## 🚧 Project Status: Under Development
+## Project Status: Under Development
 
 ## Features
 
@@ -19,7 +18,7 @@ This project focuses on learning by seeing, not just memorizing code.
 - Typewriter-style animated tagline
 - Dynamic algorithm cards and on-demand loading
 
-## ✅ Finished Components
+## Finished Components
 
 - 1D Array
 - Bubble Sort
@@ -32,7 +31,7 @@ This project focuses on learning by seeing, not just memorizing code.
 - Stack Simulation
 - Queue Simulation
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - HTML
 - CSS
