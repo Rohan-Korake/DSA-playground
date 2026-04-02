@@ -22,6 +22,7 @@
 
   --button-text: #ffffff;
   --card-focus: #facc15;
+  --hover-color: #ffffff12;
 }
 
 /* light mode */
@@ -47,4 +48,5 @@
 
   --button-text: #ffffff;
   --card-focus: #e2c120;
+  --hover-color: #00000008;
 }

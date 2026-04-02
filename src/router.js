@@ -70,8 +70,13 @@ function showAbout(homePage, visualizerContainer, aboutPage) {
   // Hide other pages
   hideOtherPages(visualizerContainer, null);
   homePage.style.display = "none";
+  homePage.classList.add("hide-wave");
 
   aboutPage.style.display = "block";
+  aboutPage.classList.add("show-wave");
+  aboutPage.addEventListener("animationend", () => {
+    aboutPage.classList.remove("show-wave");
+  });
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 

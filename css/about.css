@@ -1,0 +1,120 @@
+.about-page {
+  padding: 2rem;
+}
+
+.content-heading,
+.project-heading {
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  border-radius: 0.5rem;
+  border: 0.1rem solid var(--text-muted);
+  padding: 0.5rem;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.content-heading {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.project-heading {
+  width: 15rem;
+  padding: 1rem;
+}
+
+.content-heading:hover,
+.project-heading:hover,
+.content-description:hover {
+  background: var(--hover-color);
+}
+
+.content-description {
+  box-sizing: border-box;
+
+  user-select: none;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  width: 100%;
+  display: flex;
+  border-radius: 0.5rem;
+  border: 0.1rem solid var(--text-muted);
+  font-size: 1rem;
+  padding: 0.5rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.content-description ol,
+.content-description ul {
+  margin-left: 1.5rem;
+}
+
+.section-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.section {
+  width: 100%;
+}
+
+.card-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .about-page {
+    padding: 1rem;
+  }
+
+  .content-heading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-top: 0.5rem;
+  }
+
+  .content-description {
+    width: 100%;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-container {
+    flex-direction: column;
+    gap: 0;
+  }
+  .content-description ol,
+  .content-description ul {
+    margin-left: 1rem;
+  }
+
+  .project-heading {
+    font-size: 0.8rem;
+    width: 8rem;
+    padding: 1rem;
+  }
+}
