@@ -1,4 +1,5 @@
 import { algorithms } from "../data/algorithmData.js";
+import { navigateToAlgorithm } from "./router.js";
 
 const title = document.getElementById("title");
 const description = document.getElementById("description");
@@ -13,12 +14,15 @@ const worstCase = document.getElementById("worstCase");
 export function renderAlgo() {
   const cardContainer = document.getElementById("cardContainer");
   cardContainer.addEventListener("click", (e) => {
-    loadData(e.target.id);
+    const cardButton = e.target.closest(".try-button");
+    if (cardButton) {
+      navigateToAlgorithm(cardButton.id);
+    }
   });
 }
 
 let selectedAlgo;
-function loadData(algoName) {
+export function loadData(algoName) {
   const algoData = algorithms[algoName];
   if (!algoData) return;
   selectedAlgo = algoName;

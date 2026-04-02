@@ -1,10 +1,11 @@
-import { resetAlgorithmState } from "./controller.js";
+import { navigateToHome, navigateToAbout } from "./router.js";
 
 export function initNavbar() {
   const hamBurger = document.getElementById("hamBurger");
   const navMenu = document.getElementById("navMenu");
   const overlay = document.getElementById("overlay");
   const homeNav = document.getElementById("homeNav");
+  const aboutNav = document.getElementById("aboutNav");
   const homePage = document.querySelector(".home-page");
   const visualizerContainer = document.querySelector(".visualizer-container");
   const cardContainer = document.getElementById("cardContainer");
@@ -28,31 +29,16 @@ export function initNavbar() {
   homeNav.addEventListener("click", function () {
     if (navMenu.style.display == "block") {
       toggleHamburgerMenu();
-      resetAlgorithmState();
     }
+    navigateToHome();
+  });
 
-    //check the current is home or not
-    if (homePage.style.display == "block") return;
-
-    visualizerContainer.classList.remove("show-wave");
-    visualizerContainer.classList.add("hide-wave");
-
-    // wait for hide animation to finish before actually hiding the element
-    visualizerContainer.addEventListener(
-      "animationend",
-      function _hideViz() {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-        visualizerContainer.style.display = "none";
-        visualizerContainer.classList.remove("hide-wave");
-        visualizerContainer.removeEventListener("animationend", _hideViz);
-        homePage.style.display = "block";
-        homePage.classList.add("show-wave");
-      },
-      { once: true },
-    );
+  //handle navbar about link button
+  aboutNav.addEventListener("click", function () {
+    if (navMenu.style.display == "block") {
+      toggleHamburgerMenu();
+    }
+    navigateToAbout();
   });
 
   //handle card button
@@ -60,38 +46,6 @@ export function initNavbar() {
     if (navMenu.style.display == "block") {
       toggleHamburgerMenu();
     }
-
-    // get exact element from multiple id's
-    const cardButton = e.target.closest(".try-button");
-    if (!cardButton) return;
-
-    const searchAlgos = ["linearSearch", "binarySearch"];
-    const inputTarget = document.getElementById("inputTarget");
-
-    inputTarget.style.display = searchAlgos.includes(cardButton.id)
-      ? "flex"
-      : "none";
-
-    homePage.classList.remove("show-wave");
-    homePage.classList.add("hide-wave");
-
-    // wait for hide animation to finish before actually hiding the element
-    homePage.addEventListener(
-      "animationend",
-      function _hideHome() {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-        homePage.style.display = "none";
-        homePage.classList.remove("hide-wave");
-        homePage.removeEventListener("animationend", _hideHome);
-        visualizerContainer.style.display = "block";
-        visualizerContainer.classList.add("show-wave");
-        resetAlgorithmState();
-      },
-      { once: true },
-    );
   });
 
   //handle the hamburger functionality

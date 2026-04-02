@@ -4,6 +4,7 @@ import { initTheme } from "./theme.js";
 import { initNavbar } from "./navigation.js";
 import { renderAlgo } from "./renderAlgorithm.js";
 import { controller } from "./controller.js";
+import { initRouter } from "./router.js";
 
 // Setup when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,4 +14,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavbar();
   renderAlgo();
   controller();
+  initRouter(); // Initialize routing - must be last
 });
