@@ -1,4 +1,4 @@
-import { algorithms } from "./algorithmData.js";
+import { algorithms } from "../data/algorithmData.js";
 
 const title = document.getElementById("title");
 const description = document.getElementById("description");

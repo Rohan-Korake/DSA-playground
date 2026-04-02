@@ -1,4 +1,4 @@
-import { cardData } from "./cardData.js";
+import { cardData } from "../data/cardData.js";
 
 export function initCards() {
   function renderCards(category, clear) {
