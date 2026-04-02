@@ -8,8 +8,6 @@
 
 DSA Playground is a visual learning platform designed to help students understand Data Structures and Algorithms step by step through animations and execution logs.
 
-## Project Status: Under Development
-
 ## Features
 
 - Smooth slide-based page animations
@@ -51,3 +49,5 @@ DSA Playground is a visual learning platform designed to help students understan
 - DOM-based algorithm visualization
 - Real-time execution step logging
 - Theme switching (Dark/Light mode)
+- Single Page Application (SPA) architecture
+- Hash-based routing using JavaScript
