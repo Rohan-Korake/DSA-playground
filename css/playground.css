@@ -1,3 +1,7 @@
+.visualizer-container {
+  display: none;
+}
+
 .intro-outer-container {
   flex-wrap: wrap;
   width: 100%;

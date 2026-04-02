@@ -34,7 +34,6 @@ function handleRouteChange() {
 function showHome(homePage, visualizerContainer, aboutPage) {
   if (homePage.style.display === "block") return;
 
-  // Hide about page immediately
   aboutPage.style.display = "none";
 
   // If visualizer is showing, hide it
@@ -76,6 +75,7 @@ function showAbout(homePage, visualizerContainer, aboutPage) {
   aboutPage.classList.add("show-wave");
   aboutPage.addEventListener("animationend", () => {
     aboutPage.classList.remove("show-wave");
+    homePage.classList.remove("hide-wave");
   });
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -87,13 +87,9 @@ function showVisualizer(algoName, homePage, visualizerContainer, aboutPage) {
   // Show input target for search algorithms
   inputTarget.style.display = searchAlgos.includes(algoName) ? "flex" : "none";
 
-  // Hide about page
-  if (aboutPage.style.display === "block") {
-    aboutPage.style.display = "none";
-  }
+  aboutPage.style.display = "none";
 
   if (visualizerContainer.style.display === "block") {
-    // Already on visualizer page, just load new algo data
     loadData(algoName);
     return;
   }

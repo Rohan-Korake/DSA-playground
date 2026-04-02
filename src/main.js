@@ -14,5 +14,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavbar();
   renderAlgo();
   controller();
-  initRouter(); // Initialize routing - must be last
+  initRouter();
 });
