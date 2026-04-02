@@ -127,7 +127,7 @@ export function removeBlock(type) {
   if (type == "Queue") {
     algorithmVisualizer.removeChild(algorithmVisualizer.firstElementChild);
   } else if (type == "Stack") {
-    algorithmVisualizer.removeChild(algorithmVisualizer.lastElementChild);
+    algorithmVisualizer.removeChild(algorithmVisualizer.firstElementChild);
   }
 }
 
