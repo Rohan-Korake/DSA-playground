@@ -31,8 +31,23 @@ DSA Playground is a visual learning platform designed to help students understan
 - Stack Simulation
 - Queue Simulation
 
-## Tech Stack
+### Frontend
 
-- HTML
-- CSS
-- JavaScript
+- **HTML5** - Semantic markup and page structure
+- **CSS3** - Responsive styling with CSS variables
+  - Modular CSS files
+- **JavaScript (ES6+)** - Vanilla JS with modular architecture
+  - ES6 Modules
+  - Async/Await for asynchronous operations
+
+### External Libraries & CDN
+
+- **Font Awesome 6.5.1** - Icon library
+- **Google Fonts (Poppins)** - Typography
+
+### Core Features
+
+- Client-side rendering
+- DOM-based algorithm visualization
+- Real-time execution step logging
+- Theme switching (Dark/Light mode)
